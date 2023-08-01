@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Database\Migrations\Cars;
 use CodeIgniter\Model;
 
 class CarModel extends Model
@@ -38,4 +39,21 @@ class CarModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    private static int $recordPerPage = 10;
+    static function getPaginatedData(int $page = 1)
+    {
+        $cars = new CarModel();
+        return $cars->select('car_id, brand, model, client_id, full_name, phone')
+            ->join('clients', 'cars.owner_id = clients.client_id')
+            ->limit(self::$recordPerPage, self::$recordPerPage * ($page - 1))
+            ->find();
+    }
+
+    static function getPagesCount()
+    {
+        $cars = new CarModel();
+        return ceil($cars->countAllResults() / self::$recordPerPage);
+    }
+
 }
