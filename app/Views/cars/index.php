@@ -17,8 +17,14 @@
                     <th scope="row"><?=$car['brand'].' '.$car['model']?></th>
                     <th scope="row"><?=$car['phone']?></th>
                     <th scope="row">
-                        <button class="btn btn-primary">#EDIT</button>
-                        <button class="btn btn-danger">#DELETE</button>
+                        <div class="d-flex justify-content">
+                            <button class="btn btn-primary" type="submit">#EDIT</button>
+                            <form action="<?=site_url('/delete')?>" method="post">
+                                <button class="btn" type="submit" name="id" value="<?=$car['car_id']?>">
+                                    <img src="./img/delete.png" title="Удалить автомобиль">
+                                </button>
+                            </form>
+                        </div>
                     </th>
                 </tr>
             <?php endforeach;?>

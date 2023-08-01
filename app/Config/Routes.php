@@ -3,6 +3,8 @@
 namespace Config;
 
 // Create a new instance of our RouteCollection class.
+use App\Controllers\CarController;
+
 $routes = Services::routes();
 
 /*
@@ -29,8 +31,8 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-$routes->get('/cars', 'CarController::index');
+$routes->get('/', 'CarController::index');
+$routes->post('/delete', 'CarController::delete');
 
 /*
  * --------------------------------------------------------------------
