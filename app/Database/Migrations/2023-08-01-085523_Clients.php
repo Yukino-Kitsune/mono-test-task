@@ -18,9 +18,13 @@ class Clients extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 32,
             ],
+            'gender' => [
+                'type' => 'ENUM',
+                'constraint' => ['Мужчина', 'Женщина', 'КА-50'] // А вдруг)
+            ],
             'phone' => [
                 'type' => 'VARCHAR',
-                'constraint' => 11,
+                'constraint' => 18,
                 'unique' => true
             ],
             'address' => [
