@@ -1,5 +1,8 @@
-<div class="container">
+<div class="container w-auto d-grid justify-content-center">
     <h2 class="text-center">Список автомобилей</h2>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-primary" href="/create">Создать клиента</a>
+    </div>
     <table class="table table-hover table-sm w-auto mx-auto">
         <caption></caption>
         <thead>
@@ -18,7 +21,11 @@
                     <th scope="row"><?=$car['phone']?></th>
                     <th scope="row">
                         <div class="d-flex justify-content">
-                            <button class="btn btn-primary" type="submit">#EDIT</button>
+                            <form action="<?=site_url('/edit')?>" method="post">
+                                <button class="btn" type="submit" name="id" value="<?=$car['car_id']?>">
+                                    <img src="./img/edit.png" title="Редактировать">
+                                </button>
+                            </form>
                             <form action="<?=site_url('/delete')?>" method="post">
                                 <button class="btn" type="submit" name="id" value="<?=$car['car_id']?>">
                                     <img src="./img/delete.png" title="Удалить автомобиль">
