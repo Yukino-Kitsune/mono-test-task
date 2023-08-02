@@ -4,6 +4,7 @@ namespace Config;
 
 // Create a new instance of our RouteCollection class.
 use App\Controllers\CarController;
+use App\Controllers\ClientController;
 
 $routes = Services::routes();
 
@@ -33,6 +34,8 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'CarController::index');
 $routes->post('/delete', 'CarController::delete');
+$routes->get('/create', 'ClientController::create');
+$routes->post('/create', 'ClientController::store');
 
 /*
  * --------------------------------------------------------------------
