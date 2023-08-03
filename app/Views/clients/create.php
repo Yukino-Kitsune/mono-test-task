@@ -15,7 +15,7 @@
         </div>
         <div>
             <label class="form-label" for="phone">Телефон</label>
-            <input type="number" class="form-control w-auto" name="phone" id="phone" required>
+            <input type="text" class="form-control w-auto" name="phone" id="phone" required>
         </div>
         <div>
             <label class="form-label" for="address">Адрес</label>

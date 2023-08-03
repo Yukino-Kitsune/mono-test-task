@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\CarModel;
+use CodeIgniter\Database\Exceptions\DatabaseException;
 
 class CarController extends BaseController
 {
@@ -24,11 +25,37 @@ class CarController extends BaseController
         return view('layout/layout', $data);
     }
 
+    public function store()
+    {
+        if($this->request->isAJAX()) {
+            $newCar['brand'] = $this->request->getPost('brand', FILTER_SANITIZE_SPECIAL_CHARS);
+            $newCar['model'] = $this->request->getPost('model', FILTER_SANITIZE_SPECIAL_CHARS);
+            $newCar['color'] = $this->request->getPost('color', FILTER_SANITIZE_SPECIAL_CHARS);
+            $newCar['plate_number'] = $this->request->getPost('plate_number', FILTER_SANITIZE_SPECIAL_CHARS);
+            $newCar['parked'] = $this->request->getPost('parked', FILTER_SANITIZE_SPECIAL_CHARS);
+            $newCar['owner_id'] = $this->request->getPost('owner_id', FILTER_SANITIZE_SPECIAL_CHARS);
+            try {
+                $car = (new CarModel())->insert($newCar);
+            } catch (DatabaseException $exception) {
+                $data['msg'] = 'Ошибка добавления автомобиля';
+                $data['error'] = $exception->getMessage();
+                $this->response->setStatusCode(400);
+                return $this->response->setJSON($data);
+            }
+            $data['msg'] = 'Добавление автомобиля успешно';
+            $data['id'] = $car;
+            return $this->response->setJSON($data);
+        }
+    }
+
     public function delete()
     {
         $car = new CarModel();
         $id = $this->request->getPost('id');
         $car->delete($id);
+        if($this->request->isAJAX()) {
+            return $this->response->send();
+        }
         return $this->response->redirect('/');
     }
 }

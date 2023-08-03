@@ -21,11 +21,9 @@
                     <th scope="row"><?=$car['phone']?></th>
                     <th scope="row">
                         <div class="d-flex justify-content">
-                            <form action="<?=site_url('/edit')?>" method="post">
-                                <button class="btn" type="submit" name="id" value="<?=$car['car_id']?>">
+                                <a class="btn" href="<?= site_url('/edit/'.$car['client_id'])?>">
                                     <img src="./img/edit.png" title="Редактировать">
-                                </button>
-                            </form>
+                                </a>
                             <form action="<?=site_url('/delete')?>" method="post">
                                 <button class="btn" type="submit" name="id" value="<?=$car['car_id']?>">
                                     <img src="./img/delete.png" title="Удалить автомобиль">

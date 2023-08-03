@@ -36,6 +36,9 @@ $routes->get('/', 'CarController::index');
 $routes->post('/delete', 'CarController::delete');
 $routes->get('/create', 'ClientController::create');
 $routes->post('/create', 'ClientController::store');
+$routes->get('/edit/(:num)', 'ClientController::edit/$1');
+$routes->post('/edit', 'ClientController::update');
+$routes->post('/car/create', 'CarController::store');
 
 /*
  * --------------------------------------------------------------------
