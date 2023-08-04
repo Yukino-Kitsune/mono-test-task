@@ -56,4 +56,21 @@ class CarModel extends Model
         return ceil($cars->countAllResults() / self::$recordPerPage);
     }
 
+    static function getParkedCars()
+    {
+        $cars = new CarModel();
+        return $cars->select('car_id, brand, model, client_id, full_name, phone')
+            ->join('clients', 'cars.owner_id = clients.client_id')
+            ->where('parked = 1')
+            ->findAll();
+    }
+
+    static function getCarByClient(int $id)
+    {
+        $cars = new CarModel();
+        return $cars->where('owner_id = '.$id)
+                    ->where('parked = 0')
+                    ->findAll();
+    }
+
 }

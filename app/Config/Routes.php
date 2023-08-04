@@ -39,6 +39,9 @@ $routes->post('/create', 'ClientController::store');
 $routes->get('/edit/(:num)', 'ClientController::edit/$1');
 $routes->post('/edit', 'ClientController::update');
 $routes->post('/car/create', 'CarController::store');
+$routes->get('/report', 'CarController::report');
+$routes->post('/park', 'CarController::park');
+$routes->get('/cars', 'CarController::getClientsCars');
 
 /*
  * --------------------------------------------------------------------

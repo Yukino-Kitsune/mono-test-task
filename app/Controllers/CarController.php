@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\CarModel;
+use App\Models\ClientModel;
 use CodeIgniter\Database\Exceptions\DatabaseException;
 
 class CarController extends BaseController
@@ -57,5 +58,41 @@ class CarController extends BaseController
             return $this->response->send();
         }
         return $this->response->redirect('/');
+    }
+
+    public function report()
+    {
+        $data['title'] = 'Список припаркованных';
+        $data['content'] = 'cars/report';
+        $data['data'] = CarModel::getParkedCars();
+        $data['clients'] = ClientModel::getAll();
+        return view('layout/layout', $data);
+    }
+
+    public function park()
+    {
+        $parkStatus = 0;
+        if($this->request->isAJAX()) {
+            $parkStatus = 1;
+        }
+        $id = $this->request->getPost('car_id',FILTER_SANITIZE_SPECIAL_CHARS);
+        try {
+            (new CarModel())->update($id, ['parked' => $parkStatus]);
+        } catch (DatabaseException $exception) {
+            $data['msg'] = 'Ошибка';
+            $data['error'] = $exception->getMessage();
+            $this->response->setStatusCode(400);
+            return $this->response->setJSON($data);
+        }
+        return $this->response->redirect('/report');
+    }
+
+    public function getClientsCars()
+    {
+        if($this->request->isAJAX()) {
+            $client_id = $this->request->getGet('client_id', FILTER_SANITIZE_SPECIAL_CHARS);
+            $cars = CarModel::getCarByClient($client_id);
+            return $this->response->setJSON($cars);
+        }
     }
 }

@@ -38,4 +38,10 @@ class ClientModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    static function getAll() {
+        $clients = new ClientModel();
+        return $clients->select('client_id, full_name')
+            ->findAll();
+    }
 }

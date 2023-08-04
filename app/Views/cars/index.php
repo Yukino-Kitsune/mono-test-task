@@ -1,6 +1,7 @@
 <div class="container w-auto d-grid justify-content-center">
     <h2 class="text-center">Список автомобилей</h2>
     <div class="d-flex justify-content-end">
+        <a class="btn btn-primary mx-2" href="/report">Припаркованные авто</a>
         <a class="btn btn-primary" href="/create">Создать клиента</a>
     </div>
     <table class="table table-hover table-sm w-auto mx-auto">
