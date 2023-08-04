@@ -28,4 +28,4 @@
         </div>
     </form>
 </div>
-<script src="./js/form.js"></script>
+<script src="./js/create.js"></script>
