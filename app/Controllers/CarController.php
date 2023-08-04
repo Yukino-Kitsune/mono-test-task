@@ -17,7 +17,7 @@ class CarController extends BaseController
         if($page < 1) {
             return $this->response->redirect('/?page=1');
         }
-        elseif ($page > $data['pages']) {
+        elseif ($page > $data['pages'] && $data['pages'] > 0) {
                 return $this->response->redirect('/?page='.$data['pages'] - 1);
         }
         $data['data'] = CarModel::getPaginatedData($page);
